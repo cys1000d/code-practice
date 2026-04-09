@@ -1,25 +1,33 @@
-#include<iostream>
-#include<string>
+#include <iostream>
+#include <string>
+
 using namespace std;
-string expand()
-{
-    string s = "",x;
-    char ch;int times = 0;
-    while(cin>>ch)
-    {
-        if(ch=='[')
-        {
-            cin>>times;
-            x = expand();
-            while(times--) s+=x;
+
+string print_string01() {
+    string res = "", temp;
+    int times = 0;
+    char ch;
+    while (cin >> ch) {
+        if (ch == '[') {
+            cin >> times;
+            temp = print_string01();
+            while (times--) {
+                res += temp;
+            }
+        } 
+        else if (ch == ']') {
+            return res;
+        } 
+        else {
+            res += ch;
         }
-        else if(ch==']') return s;
-        else s+=ch;
+        if (cin.peek() == '\n') {
+            break;
+        }
     }
-    return s;
+    return res;
 }
-int main()
-{
-    cout<<expand();
+int main() {
+    cout << print_string01() << endl;
     return 0;
 }
